@@ -1,0 +1,22 @@
+{
+  "name": "rollup-swc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && rollup -c"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^13.0.5",
+    "@swc/core": "^1.2.98",
+    "@swc/helpers": "^0.2.13",
+    "rollup": "^2.58.0"
+  }
+}
