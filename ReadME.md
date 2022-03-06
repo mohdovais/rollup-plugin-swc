@@ -1,4 +1,4 @@
-# rollup-plugin-swc2
+# rollup-plugin-swc-core
 
 An opinionated swc wrapper plugin for Rollup.
 
@@ -14,7 +14,7 @@ This plugin utilises most of the @swc/core functionalities (except CSS; see roll
 ## Install
 
 ```console
-npm i rollup-plugin-swc2 -D
+npm i rollup-plugin-swc-core -D
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ npm i rollup-plugin-swc2 -D
 > default EcmaScript target is es2020.
 
 ```javascript
-import { swcPlugin } from "rollup-plugin-swc2";
+import { swcPlugin } from "rollup-plugin-swc-core";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 
