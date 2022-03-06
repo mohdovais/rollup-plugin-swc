@@ -1,22 +1,49 @@
 {
-  "name": "rollup-swc",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf dist && rollup -c"
+  "name": "rollup-plugin-swc2",
+  "version": "0.1.0",
+  "description": "Rollup Plugin SWC",
+  "main": "dist/cjs/index.js",
+  "module": "dist/mjs/index.js",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/mjs/index.js"
+    }
   },
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc -b tsconfig.json tsconfig-cjs.json",
+    "test": "rm -rf dist && rollup -c"
+  },
+  "author": "Mohd Ovais",
+  "license": "MIT",
+  "peerDependencies": {
+    "@swc/core": "*",
+    "@swc/helpers": "*",
+    "rollup": "*"
+  },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@rollup/pluginutils": "^4.1.2"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.5",
-    "@swc/core": "^1.2.98",
-    "@swc/helpers": "^0.2.13",
-    "rollup": "^2.58.0"
-  }
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.58.0",
+    "typescript": "^4.5.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohdovais/rollup-plugin-swc.git"
+  },
+  "keywords": [
+    "Rollup",
+    "Plugin",
+    "SWC"
+  ],
+  "bugs": {
+    "url": "https://github.com/mohdovais/rollup-plugin-swc/issues"
+  },
+  "homepage": "https://github.com/mohdovais/rollup-plugin-swc#readme"
 }
