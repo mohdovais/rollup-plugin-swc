@@ -1,7 +1,11 @@
 import { createFilter } from "@rollup/pluginutils";
 import { transform } from "@swc/core";
-import { createCsm2MjsPlugin } from "swc-plugin-cjs2esm";
-import { createSwcOptions, excludeHelpers, mergeDeep } from "./utils";
+import {
+  createSwcOptions,
+  excludeHelpers,
+  mergeDeep,
+  runtimeRequire,
+} from "./utils";
 
 import type { Options, JscConfig, ParserConfig } from "@swc/core";
 import type { FilterPattern } from "@rollup/pluginutils";
@@ -10,6 +14,7 @@ import type { NormalizedOutputOptions, Plugin, RenderedChunk } from "rollup";
 const defaultExtensions = ["js", "jsx", "ts", "tsx", "mjs", "cjs"];
 const tsRegExr = /\.tsx?$/;
 const jsxRegExr = /\.[jt]sx$/;
+var createCsm2MjsPlugin: CallableFunction;
 
 function transformWithSwc(
   code: string,
@@ -38,7 +43,7 @@ function transformWithSwc(
   return transform(code, options);
 }
 
-interface SwcPluginConfig {
+interface RollupPlginSwcConfig {
   inlcude?: FilterPattern;
   exclude?: FilterPattern;
   minify?: boolean;
@@ -48,7 +53,7 @@ interface SwcPluginConfig {
   commonjs?: boolean;
 }
 
-function swcPlugin(config: SwcPluginConfig = {}): Plugin {
+function rollupPluginSwc(config: RollupPlginSwcConfig = {}): Plugin {
   const {
     extensions = defaultExtensions,
     exclude,
@@ -56,7 +61,17 @@ function swcPlugin(config: SwcPluginConfig = {}): Plugin {
     minify = false,
     replace = {},
     jscConfig = {},
+    commonjs = false,
   } = config;
+
+  if (commonjs && createCsm2MjsPlugin == null) {
+    createCsm2MjsPlugin =
+      runtimeRequire<Record<"createCsm2MjsPlugin", CallableFunction>>(
+        "swc-plugin-cjs2esm"
+      ).createCsm2MjsPlugin;
+
+      console.log(createCsm2MjsPlugin)
+  }
 
   const rollupFilter = createFilter(inlcude, excludeHelpers(exclude));
   const extensionRegExp = new RegExp("\\.(" + extensions.join("|") + ")$");
@@ -86,11 +101,11 @@ function swcPlugin(config: SwcPluginConfig = {}): Plugin {
 
       options.minify = false;
       if (options.jsc != null) {
-        options.jsc.minify = { compress: false, mangle: false  };
+        options.jsc.minify = { compress: false, mangle: false };
         options.jsc.externalHelpers = true;
       }
 
-      const result = await transformWithSwc(source, id, options, true);
+      const result = await transformWithSwc(source, id, options, commonjs);
 
       return result;
     },
@@ -119,4 +134,4 @@ function swcPlugin(config: SwcPluginConfig = {}): Plugin {
   };
 }
 
-export { swcPlugin };
+export { rollupPluginSwc as swcPlugin };

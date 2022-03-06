@@ -89,5 +89,13 @@ function createSwcOptions(options: Options = {}): Options {
   return mergeDeep(defaults, options);
 }
 
+function runtimeRequire<T>(module: string) {
+  try {
+    require.resolve(module);
+    return require(module) as T;
+  } catch (e) {
+    throw `Module ${module} is not installed. Please run "npm i ${module} -D"`;
+  }
+}
 
-export { mergeDeep, excludeHelpers, createSwcOptions };
+export { mergeDeep, excludeHelpers, createSwcOptions, runtimeRequire };
