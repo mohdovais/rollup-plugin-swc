@@ -1,7 +1,7 @@
 {
   "name": "rollup-plugin-swc-core",
   "version": "0.1.0",
-  "description": "Rollup Plugin SWC",
+  "description": "All-in-one Rollup Plugin SWC",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
   "types": "dist/types/index.d.ts",
@@ -26,11 +26,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mohdovais/rollup-plugin-swc.git"
+    "url": "git+https://github.com/mohdovais/rollup-plugin-swc-core.git"
   },
-  "homepage": "https://github.com/mohdovais/rollup-plugin-swc#readme",
+  "homepage": "https://github.com/mohdovais/rollup-plugin-swc-core#readme",
   "bugs": {
-    "url": "https://github.com/mohdovais/rollup-plugin-swc/issues"
+    "url": "https://github.com/mohdovais/rollup-plugin-swc-core/issues"
   },
   "keywords": [
     "Rollup",
