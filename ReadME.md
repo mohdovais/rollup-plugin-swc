@@ -49,7 +49,7 @@ export default {
 
 ```typescript
 import type { FilterPattern } from "@rollup/pluginutils";
-import type { JscConfig } from "@swc/core";
+import type { JscConfig, Options } from "@swc/core";
 
 interface RollupPluginSwcConfig {
   inlcude?: FilterPattern;
@@ -58,7 +58,7 @@ interface RollupPluginSwcConfig {
   extensions?: string[];
   jscConfig?: JscConfig;
   replace?: Record<string, string>;
-  commonjs: boolean;
+  plugin: Options["plugin"];
 }
 ```
 
@@ -126,20 +126,6 @@ swcPlugin({
     "process.env.NODE_ENV": JSON.stringify("production"),
   },
 });
-```
-
-### commonjs
-
-An experimental swc plugin written in JavaScript to convert commonjs modules to esm modules. Please be aware that not all edge cases are tested but basic React application is working.
-
-Type: `boolean`
-
-Default: `false`
-
-This feature require npm package `swc-plugin-cjs2esm`. Please install package manually:
-
-```console
-npm i swc-plugin-cjs2esm -D
 ```
 
 ## JSX

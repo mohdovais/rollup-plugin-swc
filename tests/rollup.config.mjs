@@ -1,5 +1,5 @@
 //@ts-check
-import { swcPlugin } from "../dist/mjs/index";
+import { swcPlugin } from "../dist/index.mjs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs"
 
@@ -8,9 +8,6 @@ export default {
   output: {
     dir: "test-builds/tsx",
     entryFileNames: "app.js",
-    /**
-     * @param {string} id
-     */
     manualChunks(id) {
       if (id.includes("node_modules")) {
         return "vendor";
